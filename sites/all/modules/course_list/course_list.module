@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Course List feature.
+ */
+
+include_once 'course_list.features.inc';
