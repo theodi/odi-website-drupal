@@ -13,7 +13,7 @@ Using the power of [Drush](http://drush.ws), we can now run the Drupal website o
 
 * First of all, install Drush. You can do this easily on a Mac (with Homebrew installed) by simply running `brew install drush`, you can also use apt-get on Ubuntu, by running `sudo apt-get install drush`
 * On a Mac (not sure if this is the case on Ubuntu), you'll also need the CGI version of PHP, which [you can get from here](http://www.aprelium.com/abyssws/php.html#mac). Next copy the the PHP5 file to somewhere on your computer and symlink it into somewhere in your PATH like so `ln -s /Path/To/PHP5/bin/php-cgi /usr/local/bin/php-cgi`
-* In your `PHP5` directory, open the `lib/php.ini` directory and add the line `extension = memcache.so`, and change 
+* In your `PHP5` directory, open the `lib/php.ini` directory and add the line `extension = memcache.so`
 * Next, install and run MySQL, and set up a database for Drupal to run on
 * Next step is to get a working copy of the database. Hop onto the live server, navigate to the root `www` directory and type `drush sql-dump > ../backups/yyyy-mm-dd-backup.sql` (obviously replacing yyyy-mm-dd with the date), then download the file using SCP or FTP.
 * Also download a copy of the `sites/default/settings.php` file
