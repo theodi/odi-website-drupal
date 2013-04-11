@@ -1,6 +1,12 @@
+.DS_Store
+
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
 
 # Ignore paths that contain user-generated content.
 #sites/*/files
 sites/*/private
+
+# Ignore cached JS and css
+sites/default/files/js/*
+sites/default/files/css/*
