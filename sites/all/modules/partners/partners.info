@@ -1,0 +1,12 @@
+name = Partners
+core = 7.x
+package = Features
+dependencies[] = features
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[field][] = node-partners-field_partner_logo
+features[node][] = partners
+features[views_view][] = partners
+features_exclude[dependencies][ctools] = ctools
