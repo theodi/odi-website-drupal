@@ -7,6 +7,27 @@ This is the ODI's corporate Drupal website. We're currently working towards gett
 * Cucumber tests for new features
 * Continuous deployment(?)
 
+Styling
+-------
+
+The CSS is managed using LESS. This requires `node.js` and `lessc` to be installed on the box like so:
+
+        # Installs Node
+
+        sudo apt-get install python-software-properties python g++ make
+        sudo add-apt-repository ppa:chris-lea/node.js
+        sudo apt-get update
+        sudo apt-get install nodejs npm
+
+        # Installs lessc
+
+        sudo npm install -g less
+
+To compile to the css directory, run `lessc` from the styling directory like so:
+
+        lessc odi.less > /var/www/theodi.org/sites/all/themes/odi/css/odi.css
+
+
 ## Running the website locally
 
 Using the power of [Drush](http://drush.ws), we can now run the Drupal website on a development server with a simple terminal command in a Rails-esque stylee, and no messing around with Apache. Yay! There's a couple of steps to do this reliably:

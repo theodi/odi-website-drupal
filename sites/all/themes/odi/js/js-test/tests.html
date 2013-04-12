@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ODI Website Javascript QUnit Tests</title>
+  <link rel="stylesheet" href="qunit/qunit-1.10.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <table id="test1" class="table event-instances">
+    <thead>
+      <tr><th>Dates</th><th>Location</th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1-3 Jun 2013</td>
+        <td>Somewhere in London</td>
+        <td><a href="/courses/something-2013-06-01" class="btn btn-info">More Details</a></td>
+        <td><a href="http://dummy.eventbrite.co.uk/" class="btn btn-primary">Book Now</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="test2" class="table event-instances">
+    <thead>
+      <tr><th>Dates</th><th>Location</th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>17 Mar 2013</td>
+        <td>The office</td>
+        <td><a href="/courses/drupal-down-the-rabbit-hole-2013-03-17" class="btn btn-small btn-info">More Details</a></td>
+        <td><a href="http://www.eventbrite.com/event/5441375300" class="btn btn-small btn-primary">Book Now</a></td>
+      </tr>
+      <tr>
+        <td>16 Apr 2013</td>
+        <td>Open Data Institute</td>
+        <td><a href="/courses/open-data-law-and-licensing-2013-04-16" class="btn btn-small btn-info">More Details</a></td>
+        <td><a href="http://www.eventbrite.com/event/5519765768" class="btn btn-small btn-primary">Book Now</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="test3" class="table event-instances">
+    <thead>
+      <tr><th>Dates</th><th>Location</th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>17 Mar 2013</td>
+        <td>The office</td>
+        <td><a href="http://www.eventbrite.com/event/5441375300" class="btn btn-small btn-primary">Book Now</a></td>
+      </tr>
+      <tr>
+        <td>16 Apr 2013</td>
+        <td>Open Data Institute</td>
+        <td><a href="http://www.eventbrite.com/event/5519765768" class="btn btn-small btn-primary">Book Now</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script type="text/javascript" src="qunit/qunit-1.10.0.js"></script>
+  <script type="text/javascript" src="../js/jquery-latest.js"></script>
+  <script type="text/javascript" src="../js/event-table.js"></script>
+  <script type="text/javascript" src="training-course.js"></script>
+</body>
+</html>
