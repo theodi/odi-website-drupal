@@ -1,4 +1,7 @@
+# Ignore OS X cruft
+# not clear enough from gitignore pattern syntax whether these can be wildcarded, so specifying explicitly
 .DS_Store
+._.DS_Store
 
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
