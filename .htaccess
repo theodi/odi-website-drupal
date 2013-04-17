@@ -55,6 +55,9 @@ DirectoryIndex index.php index.html index.htm
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
   RewriteEngine on
+  
+  # Rewrite the courses.json file to be more sensible
+  RewriteRule ^courses\.json$ sites/default/files/courses.json [L]
 
   # Block access to "hidden" directories whose names begin with a period. This
   # includes directories used by version control systems such as Subversion or
