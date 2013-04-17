@@ -78,7 +78,7 @@ function course_list_views_default_views() {
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<div class="btn-toolbar">
   <div class="btn-group">
-    <a href="/courses.json" class="btn"><i class="icon-bullhorn"></i> JSON</a>
+    <a href="/courses.json" class="btn"><i class="icon-list"></i> JSON</a>
   </div>
 </div>
 <p><a href="http://www.flickr.com/photos/93591348@N03/8510825512/in/photostream"><img align="right" alt="Ideas Here" src="http://farm9.staticflickr.com/8105/8510825512_bb36cbf689_n.jpg" /></a>The ODI is committed to providing \'knowledge for everyone\' in the area of Open and Linked Data Technologies; to enable and inspire the next generation. 
