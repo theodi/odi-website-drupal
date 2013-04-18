@@ -1,6 +1,7 @@
 <?php
 // Hack to make content appear as summary in Drupal Feed Aggregator when using
 // Google Calendar feeds
+date_default_timezone_set('Europe/London');
 
 if (!isset($_GET) || !array_key_exists('url', $_GET)) {
 	die('No url given');
