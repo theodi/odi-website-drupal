@@ -76,18 +76,16 @@ function course_list_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Introduction';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<p>
-ODI is committed to providing world class training in the area of Open and Linked Data Technologies. This will enable the ODI to inspire the next generation of Open Data entrepreneurs, developers, technologists, and evangelists.
+  $handler->display->display_options['header']['area']['content'] = '<div class="btn-toolbar">
+  <div class="btn-group">
+    <a href="/courses.json" class="btn"><i class="icon-list"></i> JSON</a>
+  </div>
+</div>
+<p><a href="http://www.flickr.com/photos/93591348@N03/8510825512/in/photostream"><img align="right" alt="Ideas Here" src="http://farm9.staticflickr.com/8105/8510825512_bb36cbf689_n.jpg" /></a>The ODI is committed to providing \'knowledge for everyone\' in the area of Open and Linked Data Technologies; to enable and inspire the next generation. 
 </p>
-<p>
-A variety of training courses will be offered, the main one being an accredited postgraduate certificate in Open Data Technologies. This intensive short course will equip people with the tools, techniques and business methods of Open Data publication and application construction. Year 1 material will be developed for a single first year cohort comprising a total of 25 Open Data Technologists. In subsequent years a minimum of two cohorts will be accepted. The goal by the end of the first five years of operation will be to have trained at least 225 Open Data Technologists. 
-</p>
-<p>
-An Open Data Fellowship Programme will also be constructed. This will cover the same core material as for the Open Data Technologists. In addition these individuals will be involved in the acquisition of experience and knowledge around Open Data policy, standards and an understanding of the necessary skills for developing Open Data capabilities within organisations.  They will work to support some of our startup companies, larger private companies and public sector organisations in their formulation of Open Data strategies. 
-</p>
-<p>
-As part of the Fellows’ programme of study they will serve as ‘Open Data Evangelists’ in public and private sector organisations. Their explicit role will be to create sustainable knowledge and understanding of Open Government Data (OGD) exploitation and business opportunities within the organisations in which they are placed. All of this will be to support capability building and best practice. In year 1 we will aim for six Fellows and in subsequent years twelve. 
-</p>';
+<h4>Upcoming courses</h4>
+<h5><a href="http://www.journalism.co.uk/introduction-course-open-data-for-journalists/s382/">Introduction to open data for journalists: finding stories in data</a><br> <em>(1 day)</em></h5>
+';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['path'] = 'courses';
   $export['course_list'] = $view;
