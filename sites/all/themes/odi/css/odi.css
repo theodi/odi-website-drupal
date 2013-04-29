@@ -5065,6 +5065,9 @@ article .field,
 #header #main-menu-navbar #main-menu-pointer.to-subnav {
   border-bottom-color: #FAFAFA;
 }
+#main {
+  position: relative;
+}
 .node-cultural-piece .field-name-field-photo {
   float: left ;
   padding: 0.5em 1em 0.2em 0 ;
@@ -6633,11 +6636,6 @@ header > .submitted {
 .map-container img {
   max-width: none;
 }
-.view .btn-toolbar {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-}
 .shortcuts {
   display: none;
   position: absolute;
@@ -6782,4 +6780,9 @@ header .user-picture {
 .view-course-list .views-field,
 .view-course-list .field-content {
   display: inline;
+}
+.btn-toolbar {
+  position: absolute;
+  top: 15px;
+  right: 20px;
 }
