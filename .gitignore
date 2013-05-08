@@ -13,3 +13,5 @@ sites/*/private
 # Ignore cached JS and css
 sites/default/files/js/*
 sites/default/files/css/*
+
+install.php
