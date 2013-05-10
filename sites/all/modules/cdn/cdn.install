@@ -113,9 +113,15 @@ function cdn_requirements($phase) {
           if ($synced_files_db !== FALSE) {
             $persistent_data_db = str_replace(CDN_DAEMON_SYNCED_FILES_DB, CDN_DAEMON_PERSISTENT_DATA_DB, $synced_files_db);
             $drupal_root_path = variable_get(CDN_DRUPAL_ROOT_VARIABLE, realpath('.'));
-
-            $synced_files_db_exists      = file_exists($synced_files_db);
-            $synced_files_db_readable    = @fopen($synced_files_db, 'r');
+            
+            if (variable_get(CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE) == 0) {
+              $synced_files_db_exists      = file_exists($synced_files_db);
+              $synced_files_db_readable    = @fopen($synced_files_db, 'r');
+            } else {
+              $synced_files_db_exists = TRUE;
+              $synced_files_db_readable = TRUE;
+            }
+            
             $persistent_data_db_exists   = file_exists($persistent_data_db);
             $persistent_data_db_readable = @fopen($persistent_data_db, 'r');
             $daemon_pid_file_exists      = file_exists($daemon_pid_file);

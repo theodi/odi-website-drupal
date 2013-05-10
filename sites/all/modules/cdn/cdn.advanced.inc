@@ -63,17 +63,34 @@ function _cdn_advanced_get_db_connection() {
   static $db;
 
   $synced_files_db = variable_get(CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE, FALSE);
-
-  if ($synced_files_db === FALSE || !file_exists($synced_files_db) || filesize($synced_files_db) == 0) {
-    $db = FALSE;
-  }
-  elseif (!isset($db)) {
-    try {
-      $db = new PDO('sqlite:' . variable_get(CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE, ''));
-    } catch (PDOException $e) {
-      watchdog('cdn', "Could not open synced files DB: %error.", array('%error' => $e));
+  
+  if (variable_get(CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE) == 0) {
+    
+    if ($synced_files_db === FALSE || !file_exists($synced_files_db) || filesize($synced_files_db) == 0) {
       $db = FALSE;
     }
+    elseif (!isset($db)) {
+  
+        try {
+          $db = new PDO('sqlite:' . variable_get(CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE, ''));
+        } catch (PDOException $e) {
+          watchdog('cdn', "Could not open synced files DB: %error.", array('%error' => $e));
+          $db = FALSE;
+        }
+    }
+    
+  } elseif (variable_get(CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE) == 1) {
+    
+    try {
+      $db = new PDO('mysql:host='. variable_get(CDN_ADVANCED_MYSQL_HOST_VARIABLE, '') .';dbname='. $synced_files_db,
+                    variable_get(CDN_ADVANCED_MYSQL_USERNAME_VARIABLE, ''),
+                    variable_get(CDN_ADVANCED_MYSQL_PASSWORD_VARIABLE, '')
+                    );
+    } catch (PDOException $e) {
+      watchdog('cdn', "Could not connect to MySQL database: %error.", array('%error' => $e));
+      $db = FALSE;
+    }
+        
   }
 
   return $db;
