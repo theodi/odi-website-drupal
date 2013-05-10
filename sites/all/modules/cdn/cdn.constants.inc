@@ -53,6 +53,12 @@ define('CDN_BASIC_FARFUTURE_UNIQUE_IDENTIFIER_DEFAULT', 'mtime');
 // Variables for advanced mode.
 define('CDN_ADVANCED_PID_FILE_VARIABLE', 'cdn_advanced_pid_file');
 define('CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE', 'cdn_advanced_synced_files_db');
+define('CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE', 'cdn_db_type');
+define('CDN_ADVANCED_MYSQL_USERNAME_VARIABLE', 'cdn_advanced_mysql_username');
+define('CDN_ADVANCED_MYSQL_PASSWORD_VARIABLE', 'cdn_advanced_mysql_password');
+define('CDN_ADVANCED_MYSQL_HOST_VARIABLE', 'cdn_advanced_mysql_host');
+define('CDN_DB_SQLITE', 0);
+define('CDN_DB_MYSQL', 1);
 
 // Hardcoded settings for accessing the daemon's metadata, to show statistics.
 define('CDN_DAEMON_SYNCED_FILES_DB', 'synced_files.db');

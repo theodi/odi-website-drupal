@@ -201,10 +201,20 @@ function cdn_admin_details_form($form, &$form_state) {
       ),
     ),
   );
+  $form['settings'][CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE] = array (
+    '#type' => 'radios',
+    '#title' => t('Synced files database type'),
+    '#description' => _cdn_help('admin-details-mode') . t('Fileconveyor works with SQLite by default, but later versions support MySQL too'),
+    '#options'  => array(
+      CDN_DB_SQLITE  => t('SQLite'),
+      CDN_DB_MYSQL   => t('MySQL'),
+    ),
+    '#default_value' => variable_get(CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE, ''),
+  );
   $form['settings'][CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE] = array(
     '#type'          => 'textfield',
     '#title'         => t('Synced files database'),
-    '#description'   => _cdn_help('admin-details-mode-fc-db') . t('Full path to File Conveyor\'s synced files database file.'),
+    '#description'   => _cdn_help('admin-details-mode-fc-db') . t('Full path to (for SQLite) or name of (for MySQL) File Conveyor\'s synced files database file.'),
     '#size'          => 60,
     '#default_value' => variable_get(CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE, ''),
     '#states' => array(
@@ -212,6 +222,42 @@ function cdn_admin_details_form($form, &$form_state) {
         ':input[name="' . CDN_MODE_VARIABLE . '"]' => array('value' => CDN_MODE_ADVANCED),
       ),
     ),
+  );
+  $form['settings'][CDN_ADVANCED_MYSQL_USERNAME_VARIABLE] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Username to connect to the synced files database'),
+    '#description' =>   t('Leave blank to use the same credentials as the main Drupal database'),
+    '#size'          => 60,
+    '#default_value' => variable_get(CDN_ADVANCED_MYSQL_USERNAME_VARIABLE, ''),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="' . CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE . '"]' => array('value' => CDN_DB_MYSQL),
+      ),
+    ),  
+  );
+  $form['settings'][CDN_ADVANCED_MYSQL_PASSWORD_VARIABLE] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Password to connect to the synced files database'),
+    '#description' =>   t('Leave blank to use the same credentials as the main Drupal database'),
+    '#size'          => 60,
+    '#default_value' => variable_get(CDN_ADVANCED_MYSQL_PASSWORD_VARIABLE, ''),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="' . CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE . '"]' => array('value' => CDN_DB_MYSQL),
+      ),
+    ),  
+  );
+  $form['settings'][CDN_ADVANCED_MYSQL_HOST_VARIABLE] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Host to connect to the synced files database'),
+    '#description' =>   t('Leave blank to use the same credentials as the main Drupal database'),
+    '#size'          => 60,
+    '#default_value' => variable_get(CDN_ADVANCED_MYSQL_HOST_VARIABLE, ''),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="' . CDN_ADVANCED_SYNCED_FILES_DB_TYPE_VARIABLE . '"]' => array('value' => CDN_DB_MYSQL),
+      ),
+    ),  
   );
 
   return system_settings_form($form);
@@ -467,8 +513,7 @@ function cdn_admin_details_form_validate($form, &$form_state) {
   }
   // When in advanced mode, validate the synced files DB.
   elseif ($form_state['values'][CDN_MODE_VARIABLE] == CDN_MODE_ADVANCED) {
-    $synced_files_db = $form_state['values'][CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE];
-    _cdn_admin_validate_synced_files_db($synced_files_db, CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE);
+    _cdn_admin_validate_synced_files_db($form_state, CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE);
   }
 }
 
@@ -522,25 +567,39 @@ function cdn_admin_settings_submit_show_cache_warning($form, &$form_state) {
  * @return
  *   FALSE if there were any errors, TRUE if there weren't any.
  */
-function _cdn_admin_validate_synced_files_db($synced_files_db, $name) {
-  // Validate the file name.
-  if (strpos($synced_files_db, CDN_DAEMON_SYNCED_FILES_DB) === FALSE) {
-    form_set_error($name, t('The synced files database should have the file name %name.', array('%name' => CDN_DAEMON_SYNCED_FILES_DB)));
-    return FALSE;
-  }
-
-  // Validate the entered synced files database.
-  if (!file_exists($synced_files_db)) {
-    form_set_error($name, t('The synced files database does not exist.'));
-    return FALSE;
-  }
-  else {
-    if (!@fopen($synced_files_db, 'r')) {
-      form_set_error($name, t('The synced files database could not be opened for reading.'));
+function _cdn_admin_validate_synced_files_db($form_state, $name) {
+  $synced_files_db = $form_state['values'][CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE];
+  if ($form_state['values']['cdn_db_type'] == 0) {
+    // Validate the file name.
+    if (strpos($synced_files_db, CDN_DAEMON_SYNCED_FILES_DB) === FALSE) {
+      form_set_error($name, t('The synced files database should have the file name %name.', array('%name' => CDN_DAEMON_SYNCED_FILES_DB)));
       return FALSE;
     }
-  }
 
+    // Validate the entered synced files database.
+    if (!file_exists($synced_files_db)) {
+      form_set_error($name, t('The synced files database does not exist.'));
+      return FALSE;
+    }
+    else {
+      if (!@fopen($synced_files_db, 'r')) {
+        form_set_error($name, t('The synced files database could not be opened for reading.'));
+        return FALSE;
+      }
+    }
+  } elseif ($form_state['values']['cdn_db_type'] == 1) {
+    
+    try {
+      new PDO('mysql:host='. $form_state['values']['cdn_advanced_mysql_host'] .';dbname='. $synced_files_db,
+               $form_state['values']['cdn_advanced_mysql_username'],
+               $form_state['values']['cdn_advanced_mysql_password']
+              );
+    } catch (PDOException $e) {
+      form_set_error($name, t('Can\'t connect to the MySQL database: '. $e));
+      return FALSE;
+    }
+        
+  }
   return TRUE;
 }
 
