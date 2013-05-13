@@ -513,6 +513,20 @@ function cdn_admin_details_form_validate($form, &$form_state) {
   }
   // When in advanced mode, validate the synced files DB.
   elseif ($form_state['values'][CDN_MODE_VARIABLE] == CDN_MODE_ADVANCED) {
+    global $databases;    
+        
+    if (strlen($form_state['values']['cdn_advanced_mysql_host']) == 0) {
+      $form_state['values']['cdn_advanced_mysql_host'] = $databases['default']['default']['host'];
+    }
+    
+    if (strlen($form_state['values']['cdn_advanced_mysql_username']) == 0) {
+      $form_state['values']['cdn_advanced_mysql_username'] = $databases['default']['default']['username'];
+    } 
+    
+    if (strlen($form_state['values']['cdn_advanced_mysql_password']) == 0) {
+      $form_state['values']['cdn_advanced_mysql_password'] = $databases['default']['default']['password'];
+    }
+    
     _cdn_admin_validate_synced_files_db($form_state, CDN_ADVANCED_SYNCED_FILES_DB_VARIABLE);
   }
 }
@@ -587,8 +601,7 @@ function _cdn_admin_validate_synced_files_db($form_state, $name) {
         return FALSE;
       }
     }
-  } elseif ($form_state['values']['cdn_db_type'] == 1) {
-    
+  } elseif ($form_state['values']['cdn_db_type'] == 1) {            
     try {
       new PDO('mysql:host='. $form_state['values']['cdn_advanced_mysql_host'] .';dbname='. $synced_files_db,
                $form_state['values']['cdn_advanced_mysql_username'],
