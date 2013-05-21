@@ -4969,13 +4969,13 @@ article .field,
   overflow: hidden;
 }
 #header #logo {
-  margin: 24px 0 0 10px;
+  margin: 24px 0 0 8px;
 }
 #header #logo:hover {
   text-decoration: none;
 }
 #header #logo img {
-  margin: 24px 0 0;
+  margin: 26px 0 0;
   vertical-align: top;
 }
 #header #name-and-slogan {
@@ -5454,6 +5454,10 @@ article.node {
 }
 #block-system-user-menu ul.menu:after {
   clear: both;
+}
+#block-system-user-menu ul.menu li {
+  line-height: 15px;
+  margin-bottom: 0px;
 }
 .not-front.page-views h1.title {
   padding-top: 10px;
