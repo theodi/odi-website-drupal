@@ -4979,12 +4979,7 @@ article .field,
   vertical-align: top;
 }
 #header #name-and-slogan {
-  position: relative;
   display: inline-block;
-  height: 52px;
-  width: 100px;
-  margin: 24px 0 10px 30px;
-  font-family: arial, sans-serif;
 }
 #header #name-and-slogan #site-name {
   margin: 0;
@@ -5003,14 +4998,14 @@ article .field,
 #header #name-and-slogan #site-slogan {
   margin: 0;
   position: absolute;
-  bottom: 0;
-  left: -2px;
-  color: #3EB4E4;
-  font-weight: normal;
-  font-size: 18px;
+  top: 42px;
+  right: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
   line-height: 1em;
-  letter-spacing: 2px;
   margin-left: 2px;
+  font-family: Helvetica, sans-serif;
 }
 #header .navbar {
   margin-top: -20px;
