@@ -100,7 +100,7 @@ function render_svg ($svg, $w, $h, $alt = '') {
     <div class="branding">
       <?php if ($logo): ?>
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-          <img src="/sites/default/files/odi_header_logo.png" alt="Home" width="207" height="52">
+          <?php print render_svg("/sites/default/files/odi_header_logo.svg", 204, 49, t('Home')); ?>
         </a>
       <?php endif; ?>
 
