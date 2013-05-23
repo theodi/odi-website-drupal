@@ -100,14 +100,14 @@ function render_svg ($svg, $w, $h, $alt = '') {
     <div class="branding">
       <?php if ($logo): ?>
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-          <?php print render_svg($logo, 131, 54, t('Home')); ?>
+          <?php print render_svg("/sites/default/files/odi_header_logo.svg", 204, 48, t('Home')); ?>
         </a>
       <?php endif; ?>
 
       <?php if ($site_name || $site_slogan): ?>
         <hgroup id="name-and-slogan">
 
-          <?php if ($site_name): ?>
+          <!--<?php if ($site_name): ?>
             <?php $use_name_pic = $logo && ($site_name == 'Open Data Institute'); ?>
             <h1 id="site-name">
               <a href="<?php print $front_page; ?>" title="<?php print $site_name; ?>" rel="home">
@@ -118,7 +118,7 @@ function render_svg ($svg, $w, $h, $alt = '') {
               <?php endif; ?>
               </a>
             </h1>
-          <?php endif; ?>
+          <?php endif; ?>-->
 
           <?php if ($site_slogan): ?>
             <?php $use_slogan_pic = $logo && ($site_slogan == 'Knowledge For Everyone'); ?>
